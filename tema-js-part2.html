@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Tema JS part 2 </title>
+	<meta charset="utf-8"/>
+	<script type="text/javascript">
+
+//1. O functie "getDigits" care primeste un sir de caractere si returneaza cifrele din sirul respectiv 
+
+  function getDigits(s){
+  var numString = '1234567890'
+  var cleanString = '';
+  for (var i = 0; i < s.length; i++){
+    if (numString.indexOf(s[i]) != -1){
+      cleanString+=s[i];
+    } 
+  }
+  return cleanString;
+}
+ console.log(getDigits("ade4gr8h")); 
+
+
+ 
+
+//2. O functie "getLetters" care primeste un sir de caractere si returneaza doar literele din sirul respectiv
+
+
+
+  function getLetters(s){
+  var numString = '1234567890'
+  var cleanString = '';
+  for (var i = 0; i < s.length; i++){
+    if (numString.indexOf(s[i]) === -1){
+      cleanString+=s[i];
+    } 
+  }
+  return cleanString;
+}
+ console.log(getLetters("ade4gr8h")); 
+
+
+
+//3. O functie "getFirst5Letters" care primeste un sir de caractere si returneaza primele 5 litere(daca exista)
+  function getFirst5Letters(s){
+  var numString = '1234567890'
+  var cleanString = '';
+  for (var i = 0; i < s.length; i++){
+    if (numString.indexOf(s[i]) === -1){
+      cleanString = cleanString + s[i];
+      cleanString = cleanString.slice(0,3);
+    } 
+  }
+  return cleanString;
+}
+ console.log(getFirst5Letters("ade4gr8hddd")); 
+
+
+
+//4. O functie "concatenate" care primeste o lista de siruri de caractere si returneaza sirurile concatenate
+
+	function concatenate() {
+		var persoana = {
+				"nume": "Smarandache ",
+				"prenume": "Alina",
+				"dataNasterii": "1988-01-07",
+
+			}
+
+			return "My name is " + persoana['nume'] + persoana['prenume'] + " and my birthday is on " + persoana['dataNasterii'];
+		}
+
+ console.log(concatenate()); 
+
+//5. O functie "getAllDigits" care primeste o lista de siruri de caractere si returneaza cifrele din toate sirurile
+
+	
+		var persoana = {
+				"nume": "Smarandache ",
+				"prenume": "Alina",
+				"dataNasterii": "7 ianuarie 1988",
+
+			}
+			 console.log(persoana); 
+	function getAllDigits() {
+			
+		}
+
+
+
+//6. O functie "invertAllStrings" care primeste o lista de siruri de caractere si returneaza lista de siruri de caractere inversate
+
+//7. Calculeaza factorialul unui numar ("factorial")
+	function factorial(n){
+	  j = 1;
+	  for(i=1; i<=n; i++){
+	    j = j*i;
+	  }
+	  return j;
+	}
+
+	console.log(factorial(4));
+
+
+//8. Calculeaza cel mai mare divizor comun al 2 numere ("cmmdc")
+	function cmmdc(a, b) {
+	    if (b == 0) {
+	        return a;
+	    }
+	    return cmmdc(b, a % b);
+	};
+
+console.log(cmmdc(12,4));
+
+
+
+//9. Calculeaza cel mai mic multiplu comun al 2 numere ("cmmmc")
+
+
+
+
+
+
+//10. Returneaza un array care sa contina toti divizorii unui numar (ex pentru 64: trebuie sa returneze [2,4,8,16,32]) ("divizori")
+	function divizori(n) { 
+	    for (var i = 1; i <= n; i++) {
+	        if (n%i == 0) {
+	            return n; 
+	        }
+	    } return "";
+	} 
+	   
+	  console.log(divizori(64));
+//11. O functie care verifica daca un numar este palindrom (ex: 121, 1234321) ("palindrom")
+
+
+		function inversa(str){
+				var strInvers = ""; 
+				for(var i=str.length-1;i>=0;i--){
+					strInvers+=str[i];
+				}
+				return strInvers;
+			}
+			
+		function palindrom(str){
+				return str===inversa(str);
+			}
+
+		function palindrom2(str){
+			for(var i=0;i<str.length;i++){
+				if(str[i]!==str[str.length-i-1]){
+					return false;
+				}
+			}
+				return true;
+		}
+
+		console.log(palindrom("1234321"));
+
+
+//12. O functie care sorteaza numerele pare dintr-un sir de numere primit ca parametru. ("sort")
+
+function sortOddNumbers(numList){ 
+    var evenTotal = 0;
+    var oddTotal = 0;
+
+  for (var i = 0; i < numList.length; i++) {
+    if (i % 2) {  // i is odd
+        oddTotal += numList[i];
+
+    }
+    else {  // i is even
+        evenTotal += numList[i];
+
+    }
+  }
+
+  return evenTotal;
+} 
+
+console.log(sortOddNumbers(["24", "11", "12"]));
+
+//13. O functie care primeste ca parametru un array de numere. Aceasta sorteaza ascendent numerele pare si descendent numerele impare, in cadrul aceluiasi array primit ca parameru. ("sortAscDesc")
+
+//14. O functie care primeste 2 parametri(un array si un numar). Folosind binary search verificati daca numarul primit ca parametru se gaseste in array. ("binarySearch")
+
+
+//15. O functie care implementeaza binary search pentru a verifica daca un numar se regaseste intr-un array. Dupa ce se termina executia functiei trebuie sa returnati de cate ori s-a apelat functia recursiv ("countBinarySearch")
+
+	</script>
+</head>
+
+<body>
+</body>
+</html>
