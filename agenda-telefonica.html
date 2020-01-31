@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Agenda Telefonica</title>
+	<meta charset="utf-8"/>
+    <style>
+        body {
+            background-color: #fef8e1;
+            margin: 0px;
+            padding: 0px;
+            font-family: Calibri;
+        }
+        #form-section, #contacts-section {
+            display: block;
+            margin:0px auto;
+            background-color: #feca27;
+            border-radius: 5px;
+            padding: 30px 60px;
+            width: 40%;
+            text-align: center;
+        }
+
+        #form-section label, #contacts-section p {        
+            font-size: 20px;
+
+        }
+         #form-section input {
+            border: 1px solid #fff;
+            padding: 8px 17px;
+            border-radius: 5px;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-bottom: 20px;
+
+         }
+         #form-section input.sendButton {
+            border: 0px;
+         }
+         .sendButton {
+             background-color: #3f50b5;
+             color: #fff;
+             font-weight: 400;
+             padding: 10px 20px;
+             font-size: 15px;
+         }
+
+         .sendButton:hover {
+            cursor: pointer;
+            background-color: #0f1d72;
+        }
+
+         h1 {
+            text-align: center;
+            margin-top: 4%;
+            font-size: 40px;
+         }
+         #contacts-section {
+            margin-top: 30px;
+        }
+        th {
+            font-size: 20px;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+        .icon:hover {
+            cursor: pointer;
+        }
+
+        #form-section input.redBorder {
+            border: 1px solid red;
+        }
+ 
+        .requiredNum, .requiredChar {visibility: hidden; margin: 0px;}
+        .visible {visibility: visible; color: red; font-style: italic;}
+    </style> 
+  
+
+
+	<script type="text/javascript">
+
+        var agendaTelefonica = [];
+
+        var indexEdit;
+
+        function addContacts() {
+            var str = "";
+                for(var i=0; i < agendaTelefonica.length; i++) {
+
+               var utilizator = agendaTelefonica[i];
+                    str+= `
+                        <tr>
+                        <td>${utilizator.name}</td>
+                        <td>${utilizator.telephone}</td>
+          
+
+                            <td><!--
+                              --><img class="icon" alt="svgImg" onclick="edit(${i})" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzAiIGhlaWdodD0iMzAiCnZpZXdCb3g9IjAgMCA0MCA0MCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48cGF0aCBmaWxsPSIjZjVjZTg1IiBkPSJNNS45ODIgMjkuMzA5TDguNTcxIDI2LjcxOSAxMy42MTggMzEuMTE1IDEwLjcxNSAzNC4wMTkgMi40NTMgMzcuNTQ3eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM5NjdhNDQiIGQ9Ik04LjU5NSwyNy40MDNsNC4yOTEsMy43MzdsLTIuNDU3LDIuNDU3bC03LjAyNiwzLjAwMWwzLjAwMS03LjAwM0w4LjU5NSwyNy40MDMgTTguNTQ4LDI2LjAzNiBsLTIuOTg4LDIuOTg4bC00LjA1OSw5LjQ3NEwxMSwzNC40NGwzLjM1MS0zLjM1MUw4LjU0OCwyNi4wMzZMOC41NDgsMjYuMDM2eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiMzNjQwNGQiIGQ9Ik0zLjgwNSAzMy4xM0wxLjUwNCAzOC41IDYuODg4IDM2LjIwMXoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZjc4ZjhmIiBkPSJNMzAuMDYyLDUuMjE1TDMyLjMsMi45NzhDMzIuOTMxLDIuMzQ3LDMzLjc2OSwyLDM0LjY2LDJzMS43MjksMC4zNDcsMi4zNiwwLjk3OCBjMS4zMDIsMS4zMDIsMS4zMDIsMy40MTksMCw0LjcyMWwtMi4yMzcsMi4yMzdMMzAuMDYyLDUuMjE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiNjNzQzNDMiIGQ9Ik0zNC42NiwyLjVjMC43NTgsMCwxLjQ3MSwwLjI5NSwyLjAwNywwLjgzMWMxLjEwNywxLjEwNywxLjEwNywyLjkwNywwLDQuMDE0bC0xLjg4NCwxLjg4NCBMMzAuNzcsNS4yMTVsMS44ODQtMS44ODRDMzMuMTg5LDIuNzk1LDMzLjkwMiwyLjUsMzQuNjYsMi41IE0zNC42NiwxLjVjLTAuOTgyLDAtMS45NjUsMC4zNzUtMi43MTQsMS4xMjRsLTIuNTkxLDIuNTkxIGw1LjQyOCw1LjQyOGwyLjU5MS0yLjU5MWMxLjQ5OS0xLjQ5OSwxLjQ5OS0zLjkyOSwwLTUuNDI4djBDMzYuNjI1LDEuODc1LDM1LjY0MywxLjUsMzQuNjYsMS41TDM0LjY2LDEuNXoiPjwvcGF0aD48Zz48cGF0aCBmaWxsPSIjZmZlZWEzIiBkPSJNMTEuMzQ2LDMzLjM4OGMtMC4wNjYtMC4xNTMtMC4xNTctMC4zMDgtMC4yODItMC40NTRjLTAuMzEtMC4zNjMtMC43NDktMC41ODQtMS4zMS0wLjY2MSBjLTAuMi0xLjI2Ny0xLjIwNi0xLjgwMy0xLjk4OS0xLjk2NGMtMC4xMzItMC44NjQtMC42NDktMS4zNDItMS4yMDEtMS41ODJsMjEuNDktMjEuNTAzbDQuNzIxLDQuNzIxTDExLjM0NiwzMy4zODh6Ij48L3BhdGg+PHBhdGggZmlsbD0iI2JhOWI0OCIgZD0iTTI4LjA1NCw3LjkzMWw0LjAxNCw0LjAxNEwxMS40MzEsMzIuNTk0Yy0wLjI0Mi0wLjI3OC0wLjYzOC0wLjU5LTEuMjYxLTAuNzQ4IGMtMC4zMDYtMS4wNzgtMS4xNTUtMS42ODUtMS45ODMtMS45NDNjLTAuMTUxLTAuNTQ2LTAuNDQ3LTAuOTY4LTAuODIxLTEuMjcyTDI4LjA1NCw3LjkzMSBNMjguMDUzLDYuNTE3TDUuNTYsMjkuMDIzIGMwLDAsMC4wMDcsMCwwLjAyMSwwYzAuMTk3LDAsMS43MTUsMC4wNTQsMS43MTUsMS43MzFjMCwwLDEuOTkzLDAuMDYyLDEuOTkzLDEuOTljMS45ODIsMCwxLjcxLDEuNjk3LDEuNzEsMS42OTdsMjIuNDgyLTIyLjQ5NSBMMjguMDUzLDYuNTE3TDI4LjA1Myw2LjUxN3oiPjwvcGF0aD48L2c+PGc+PHBhdGggZmlsbD0iI2Q5ZTdmNSIgZD0iTTI5LjEwNyA0Ljc2NEgzNC42ODVWMTEuNDQwOTk5OTk5OTk5OTk5SDI5LjEwN3oiIHRyYW5zZm9ybT0icm90YXRlKC00NS4wMDkgMzEuODk1IDguMTAzKSI+PC9wYXRoPjxwYXRoIGZpbGw9IiM3ODhiOWMiIGQ9Ik0zMS41MDcsNC40NzdsNC4wMTQsNC4wMTRsLTMuMjM3LDMuMjM3TDI4LjI3LDcuNzE0TDMxLjUwNyw0LjQ3NyBNMzEuNTA3LDMuMDYzbC00LjY1MSw0LjY1MSBsNS40MjgsNS40MjhsNC42NTEtNC42NTFMMzEuNTA3LDMuMDYzTDMxLjUwNywzLjA2M3oiPjwvcGF0aD48L2c+PC9zdmc+">
+<!--  --> <img  class="icon" alt="svgImg" onclick="del(${i})" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iNDgiIGhlaWdodD0iNDgiCnZpZXdCb3g9IjAgMCA0OCA0OCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij48cGF0aCBmaWxsPSIjRjQ0MzM2IiBkPSJNMjEuNSA0LjVIMjYuNTAxVjQzLjVIMjEuNXoiIHRyYW5zZm9ybT0icm90YXRlKDQ1LjAwMSAyNCAyNCkiPjwvcGF0aD48cGF0aCBmaWxsPSIjRjQ0MzM2IiBkPSJNMjEuNSA0LjVIMjYuNVY0My41MDFIMjEuNXoiIHRyYW5zZm9ybT0icm90YXRlKDEzNS4wMDggMjQgMjQpIj48L3BhdGg+PC9zdmc+"> <!-- --></td>
+                        </tr>
+                    `;
+
+ }
+                document.querySelector("table tbody").innerHTML = str;
+           }
+
+
+                function add(event){
+                event.preventDefault();
+                var newLink = {
+                    
+                   name:document.querySelector("[name='name']").value,
+                   telephone:document.querySelector("[name='telephone']").value
+
+                };
+
+
+                var valid = true;
+                if(newLink.name.length<3){
+                    document.querySelector("[name='name']").classList.add("redBorder");
+                    document.querySelector(".requiredChar").classList.add("visible");
+                    valid = false;
+
+                } else {
+                    document.querySelector("[name='name']").classList.remove("redBorder");
+                    document.querySelector(".requiredChar").classList.remove("visible");
+                  
+                }
+
+                if(newLink.telephone.length<10){
+                    document.querySelector("[name='telephone']").classList.add("redBorder");
+                    document.querySelector(".requiredNum").classList.add("visible");
+                    valid = false;
+
+                } else {
+                    document.querySelector("[name='telephone']").classList.remove("redBorder");
+                    document.querySelector(".requiredNum").classList.remove("visible");
+                }
+
+
+                if(indexEdit === undefined && valid == true){
+                    // indexEdit === undefined inseamna ca e nou si valid == true inseamna ca nu sunt introduse <3 sau <10 => deci il adauga la sfarsitul listei
+                    agendaTelefonica.push(newLink);
+
+                }else{
+                    //inlocuiesc obiectul vechi cu cel nou preluat din formular.
+                    agendaTelefonica[indexEdit]=newLink;
+                }
+                
+                addContacts();
+                document.querySelector("#idForm").reset(); //sterge inputurile dupa trimitere
+
+            }
+
+
+            function edit(idx){
+                document.querySelector("[name='name']").value=agendaTelefonica[idx].name;
+                document.querySelector("[name='telephone']").value=agendaTelefonica[idx].telephone;
+
+
+                window.indexEdit = idx;
+            }
+
+            function del(idx) {
+                if(confirm(`Esti sigur ca vrei sa stergi ${agendaTelefonica[idx].name} ?`)){
+                    agendaTelefonica.splice(idx,1);
+                    addContacts();
+                }
+            }
+
+
+
+
+
+    </script>
+</head>
+
+<body onload="addContacts()">
+    
+        <h1>Agenda</h1> 
+        <div id="form-section">           
+            <form id="idForm" onsubmit="add(event);">
+
+              <p class="requiredChar">*Acest camp este obligatoriu de completat si trebuie sa contina cel putin 3 caractere!</p>
+              <label>Nume: <input type="text" name="name" class="inputForm" /></label>
+
+              <p class="requiredNum">*Acest camp este obligatoriu de completat si trebuie sa contina cel putin 10 cifre!</p>
+              <label>Telefon: <input type="number" name="telephone" class="inputForm" /></label><br />
+
+              <input type="submit" value="ADAUGA CONTACT" class="sendButton" />
+            </form> 
+
+        </div>
+
+        <div id="contacts-section">
+            <table border="0" style="width:100%; border-collapse:collapse;" >
+            <thead>
+                <tr>
+                    <th>Nume</th>
+                    <th>Telefon</th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+
+        </div>
+
+    
+</body>
+</html>
+
+
+
+
