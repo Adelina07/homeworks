@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Shopping List</title>
+	<meta charset="utf-8"/>
+    <style>
+        body {
+            background-color: #fef8e1;
+            margin: 0px;
+            padding: 0px;
+            font-family: Calibri;
+        }
+        #form-section, #contacts-section {
+            display: block;
+            margin:0px auto;
+            background-color: #feca27;
+            border-radius: 5px;
+            padding: 30px 60px;
+            width: 40%;
+            text-align: center;
+        }
+
+        #form-section label, #contacts-section p {        
+            font-size: 20px;
+
+        }
+         #form-section input {
+            border: 1px solid #fff;
+            padding: 8px 17px;
+            border-radius: 5px;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-bottom: 20px;
+
+         }
+         #form-section input.sendButton {
+            border: 0px;
+         }
+         .sendButton {
+             background-color: #3f50b5;
+             color: #fff;
+             font-weight: 400;
+             padding: 10px 20px;
+             font-size: 15px;
+         }
+
+         .sendButton:hover {
+            cursor: pointer;
+            background-color: #0f1d72;
+        }
+
+         h1 {
+            text-align: center;
+            margin-top: 4%;
+            font-size: 40px;
+         }
+         #contacts-section {
+            margin-top: 30px;
+        }
+        th {
+            font-size: 20px;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+        .icon:hover {
+            cursor: pointer;
+        }
+
+        #form-section input.redBorder {
+            border: 1px solid red;
+        }
+ 
+        .requiredNum, .requiredChar {visibility: hidden; margin: 0px;}
+        .visible {visibility: visible; color: red; font-style: italic;}
+        .nume-produs.line {text-decoration: line-through;}
+    </style> 
+  
+
+
+	<script type="text/javascript">
+
+        var listaCumparaturi = [];
+
+        var indexEdit;
+
+        function addItems() {
+            var str = "";
+                for(var i=0; i < listaCumparaturi.length; i++) {
+
+               var element = listaCumparaturi[i];
+                    str+= `
+                        <tr>
+                        <td class="nume-produs">${element.name}</td>        
+                        <td><button type"submit class="markItem">Mark as buyed</button></td>
+                        </tr>
+                    `;
+
+ }
+                document.querySelector("table tbody").innerHTML = str;
+           }
+
+
+                function add(event){
+                event.preventDefault();
+                var newLink = {
+                    
+                   name:document.querySelector("[name='name']").value,
+               
+
+                };
+
+
+                var valid = true;
+                if(newLink.name.length<3){
+                    document.querySelector("[name='name']").classList.add("redBorder");
+                    document.querySelector(".requiredChar").classList.add("visible");
+                    valid = false;
+
+                } else {
+                    document.querySelector("[name='name']").classList.remove("redBorder");
+                    document.querySelector(".requiredChar").classList.remove("visible");
+                  
+                }
+
+
+                if(indexEdit === undefined && valid == true){
+                    // indexEdit === undefined inseamna ca e nou si valid == true inseamna ca nu sunt introduse <3 sau <10 => deci il adauga la sfarsitul listei
+                    listaCumparaturi.push(newLink);
+
+                }else{
+                    //inlocuiesc obiectul vechi cu cel nou preluat din formular.
+                    listaCumparaturi[indexEdit]=newLink;
+                }
+                
+                addItems();
+                document.querySelector("#idForm").reset(); //sterge inputurile dupa trimitere
+
+            }
+
+            function checkItem() {
+                document.querySelector(".nume-produs").classList.add("line");
+            }
+
+
+          
+
+
+
+
+    </script>
+</head>
+
+<body onload="addItems()">
+    
+        <h1>SHOPPING LISTaaaa</h1> 
+        <div id="form-section">           
+            <form id="idForm" onsubmit="add(event);">
+
+              <p class="requiredChar">*Acest camp este obligatoriu de completat si trebuie sa contina cel putin 3 caractere!</p>
+              <label>Nume: <input type="text" name="name" class="inputForm" /></label>
+
+
+              <input type="submit" value="ADAUGA CONTACT" class="sendButton" />
+            </form> 
+
+        </div>
+
+        <div id="contacts-section">
+            <table border="0" style="width:100%; border-collapse:collapse;" >
+            <thead>
+                <tr>
+                    <th>Item description</th>
+                    <th>Action</th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+                 <tr>
+                        <td>Item description</td>
+                        <td>Action</td>
+                    </tr>
+
+                
+            </tbody>
+        </table>
+
+        </div>
+
+    
+</body>
+</html>
+
+
+
+
