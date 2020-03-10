@@ -89,11 +89,11 @@
 
         var listaCumparaturi = [];
 
-        var indexEdit;
 
         function addItems() {
             var str = "";
                 for(var i=0; i < listaCumparaturi.length; i++) {
+                    
 
                var element = listaCumparaturi[i];
                     str+= `
@@ -106,20 +106,31 @@
                         </tr>
                     `;
 
- }
+                    if(listaCumparaturi[i].strike === true) {
+
+                        document.querySelectorAll(".nume-produs")[i].classList.add("line");
+
+                    }
+
+
+ }     
                 document.querySelector("table tbody").innerHTML = str;
  
            }
+
+
+
 
 
                 function add(event){
                 event.preventDefault();
                 var newLink = {
                     
-                name:document.querySelector("[name='name']").value,
-               
+                 name:document.querySelector("[name='name']").value,
+                 strike : false
 
                 };
+
 
 
                 var valid = true;
@@ -135,14 +146,10 @@
                 }
 
 
-                if(indexEdit === undefined && valid == true){
-                    // indexEdit === undefined inseamna ca e nou si valid == true inseamna ca nu sunt introduse <3 sau <10 => deci il adauga la sfarsitul listei
-                    listaCumparaturi.push(newLink);
+                if(valid == true){
+                    listaCumparaturi.push(newLink); // adauga in lista
                     document.querySelector("#idForm").reset(); //sterge inputurile dupa trimitere
 
-                }else{
-                    //inlocuiesc obiectul vechi cu cel nou preluat din formular.
-                    listaCumparaturi[indexEdit]=newLink;
                 }
                 
 
@@ -153,22 +160,27 @@
 
             }
 
-                function checkItem(i) {
-                document.querySelectorAll(".nume-produs")[i].classList.add("line");
-              
-               
+
+            function checkItem(i) {
+                 
+                listaCumparaturi[i].strike = true;
+        
+                console.log(listaCumparaturi[i].strike);
+
+            
             }
+
 
             class ElementeLista {
                 sortAsc(){
-                    this.listaCumparaturi.sort(function(a,b){
+                    listaCumparaturi.sort(function(a,b){
                         return a.name - b.name;
                         
 
                     });
                 }
                 sortDesc(){
-                    this.listaCumparaturi.sort(function(a,b){
+                    listaCumparaturi.sort(function(a,b){
                         return b.name - a.name;
                     });
                 }
