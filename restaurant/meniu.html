@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Meniu</title>
+		<link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript">
+
+			var list = {};
+	
+			async function getList(){
+			var response = await fetch("https://restaurant-menu-v1.firebaseio.com/menu.json");
+			window.list = await response.json();
+			draw();
+			}
+
+			
+			function draw() {
+				var str = "";
+				var input = document.querySelector("[name=cautare]").value;
+				for (var i in list) { // cand trebuie sa caute in array de tip 0: {}, 1: {}, 2: {}...etc
+					
+				var preparat = list[i];
+					if(preparat.ingrediente.indexOf(input)>-1 || preparat.nume.indexOf(input)>-1 ){
+						str+=`			
+						<div class="boxMancare">
+						<img class="floatLeft" src="${preparat.imagine}" width="300" alt="">
+						<div class="titluIngrediente floatLeft">
+						<span>${preparat.nume}</span>
+						<p>${preparat.ingrediente}</p>
+						</div>
+						<a href="detalii.html?id=${i}" class="floatLeft detailsBtn">DETALII</a>
+						</div>
+						`
+					}
+				}
+
+				document.querySelector("#continutMeniu").innerHTML = str;
+			}
+
+
+
+
+
+
+
+		</script>
+</head>
+
+
+	<body onload="getList()">
+		
+
+		<div id="container">
+			<div class="butoane-right">
+			<a href="contact.html" >Contact</a>
+			</div>
+		
+			<h1>Cald si bun</h1>
+		
+			<input type="text" name="cautare" oninput="draw()"/><!-- oninput afiseaza pe masura ce tasteaza cuvantul !-->
+			<button type="submit" class="searchIngredients" id="mySearch" >Cauta in ingrediente</button> 
+		
+		</div>
+
+		<div id="continutMeniu">
+		</div>
+
+
+	</body>
+</html>

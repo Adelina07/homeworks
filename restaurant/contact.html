@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8"/>
+	<title>Contact</title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+	<body style="padding: 50px;">
+		<div id="container">
+			<div class="butoane-right">
+			<a href="meniu.html" class="pink">Meniu</a>
+			</div>
+
+		    <h1>Cald si bun</h1>
+		    <p><strong>Adresa Hanu' Berarilor Casa Soare:</strong> Strada Poenaru Bordea 2, București 0400</p>
+	    </div>
+
+    	<div id="map"></div>
+
+	    <script>
+			function initMap() {
+			  var restaurant = {lat: 44.428885, lng: 26.096671};
+			  var map = new google.maps.Map(
+			      document.getElementById('map'), {zoom: 14, center: restaurant});
+			  var marker = new google.maps.Marker({position: restaurant, map: map});
+			}
+	    </script>
+	    <script async defer
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgQlZtcN5VO3YBCc4eIZI2okaQ2f5wDWY&callback=initMap">
+	    </script>
+  	</body>
+</html>

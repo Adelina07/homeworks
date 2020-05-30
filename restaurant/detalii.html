@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Meniu</title>
+<link href="css/style.css" rel="stylesheet">
+<style>
+
+
+</style>
+<script type="text/javascript">
+	var list = {};
+	async function getList(){
+	var response = await fetch(`https://restaurant-menu-v1.firebaseio.com/menu/${window.location.search.substr(4)}.json`);
+	window.list = await response.json();
+	detaliiPreparat();
+	}
+
+	function detaliiPreparat() {
+	document.querySelector("#imagineDetalii").src = list.imagine;
+	document.querySelector("#titluDetalii").innerHTML = list.nume;
+	document.querySelector("#ingredienteDetalii").innerHTML = list.ingrediente;
+	document.querySelector("#retetaDetalii").innerHTML = list.reteta;
+		
+	 
+	}
+
+
+</script>
+	
+	</head>
+	<body onload="getList()">
+	<div id="container">
+		<div class="butoane-right">
+		<a href="meniu.html" class="pink">Meniu</a>
+		</div>
+
+
+		<h1>Cald si bun</h1>
+		<div id="paginaDetalii">	
+			<img id="imagineDetalii" src="" /><br/>
+			<span id="titluDetalii"></span>
+			<p id="ingredienteDetalii"></p>
+			<p id="retetaDetalii"></p>
+		</div>
+	</div>
+
+	</body>
+</html>
