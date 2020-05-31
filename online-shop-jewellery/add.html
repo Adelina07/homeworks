@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Meniu</title>
+		<link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript">
+
+
+
+			 var list = {};
+        async function getList(){
+        var response = await fetch("https://online-shop-jewellery.firebaseio.com/menu/${window.location.search.substr(4)}.json");
+
+        window.list = await response.json();
+        draw();
+      
+        }
+
+			
+			function draw() {
+				var str = "";
+			
+				
+				
+						str+=`			
+						<div class="boxProduse">
+						<form>
+						<span>URL IMAGINE:</span>
+						<input type="text" name="urlImagine" placeholder="" />
+						<br />
+
+						<span>NUME:</span>
+						<input type="text" name="numePreparat" placeholder="" /><br />
+					
+
+						<span>DESCRIERE:</span>
+						<input type="text" name="ingredientePreparat" placeholder="" /><br />
+
+						<span>PRET:</span>
+						<input type="text" name="pretPreparat" class="numePreparat" placeholder="" /><br />
+
+						<span>CANTITATE:</span>
+						<input type="number" name="cantitatePreparat" class="numePreparat"  />
+					
+					<br />
+		
+						</div>
+					
+						</form>
+						</div>
+						`
+					
+				
+
+				document.querySelector("#continutProduse").innerHTML = str;
+			}
+
+  				
+
+
+
+
+		</script>
+</head>
+
+
+	<body onload="getList()">
+
+		<div class="container addProduct">
+			<h1>Adaugare produs</h1>
+			<button class="saveButton button">SALVEAZA</button>
+			<button class="closeButton button">CLOSE</button>
+			<div id="continutProduse">
+			</div>
+		
+		</div>
+
+		
+
+
+	</body>
+</html>

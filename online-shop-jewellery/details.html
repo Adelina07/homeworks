@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Online Shop Jewellery</title>
+		<meta charset="UTF-8">
+
+  		<link href="css/style.css" rel="stylesheet">
+  			<script src="js/details.js"></script>
+	</head>
+	<body onload="showMain();getList();">
+		<div class="loader-f"></div>
+
+		<div class="grayBckgr">
+		<div id="mainContent" class="fancy container">
+			<div class="boxCartLogin">
+			<a href="cart.html" title="Cos de cumparaturi"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAJJ0lEQVRoge2Ze3AV1R3HP2d37zPJzc07IQECSEkQTGjBoVoeqR2qIoqKMFgYsWrHDoozdUarxf7RqcWittEOxVJpix2sSB1bcURnnJqKmqAlQRJQUAIxISSBm8d93927e/rHJhFigjeGttOZfGf2j3vO/h7f8/h9z54L4xjHOMYB3AU4gZnAt/7HuYwaGYAJ/AMIAxL4DLjxvxFcG6N9FrATO+kdgBvYDLT1t/3HoYzR/iWgAxDALuyRzwT+BRwYo++UMJYZqATKgWuA64Bc4DhwyRhzmgFcAUwCvEAv9sC8C5wc+vJYCHiAHiCBPQvF2ARWABVAI2CNwp8L+IMQYllxcXFjQUGBnpubK7u6ukR7e7u7q6urWkrZANwDHBswEmMgoALNwO+Bm4FO4FIgvz+ABiztfycVbPX7/fN37NgxLS0tLWNop2maRnV19b69e/eWY1e7XhjbHjCB64EyYCrQBfwAiAGzge3Ab1L0VQiseeaZZ4qHSx5AVVXH/fff/22/398GLBloH2sV+hBYA+wDnsMupRnYy+s5YGOKfqpycnKO5ebmfv3cxqampo+3bdvW1dzcXKDrerZlWenAXKD7YhEYgAN7RiwgAqRjj2r3hYzOwdT8/PzouQ0bN258q66urhz4C/YANQJnhxqOlcCfsCtRMTAF+BiIAsuA+4AnUvTjdblcgz8aGxsP19XVlQKzgMCFDMeqA/cBW7AV+HHgEJAN3AtsAn6boh/d6XQOCt/27dvPYC/BCyYPY5+Bvv5AQeCbwIPYa/QoEBqFn0g8Hh+siK2trT5gfyqGYyWgYW/a97FFZil2Gb0aW9iysDf0AJxAGrZAubD3ig6owWAwOPBSPB5PJ4XRH4nABOAy7Jo+EXt9+/ufDD6vMn5AIEQQKdNQ1dPC7elR0rwxpaAwppaUINJ9ny/RpEHs5Zeu9Kxa/Y42dZpDSU9z4HRawkiK+Ns1XSffeH1OQ0PD0Tlz5syQUirYAjlqApcjxBsiPf0zdeLEPm3KNKkUFjiM9/cbVmeX6Xv0F17hdGnC4xbC4zVRVQ3w9az93geelSsN97IbrhgpUHTXC7XC729Iu23dwqF96ZWVmD09NTt37tT6CaQssEMJLHctXHQw48GHFp/bmCgu+TD8y01etbhk4rBOKisiiXfexb3shhEDmSeO69r06fpI/WphkRI+3DgwY4IUT7NDq9C+xHvvTkbK884wrrnzyqWuF1mBQNdwTpwLFmUlPzmaf6FAViCgqHn5542sjEQjen394ejuF2uNd/Z5CgoKzHMIpIShM/AGhtHbe989rTIS1YSmJfF4hPC4dYSYFfzpTz7Vyso/Euk+RaR5FcXtVkSmz4mRtGQ8Xm401DcJX6ZHuF1Oq7cvCtLC0E0ZjujJtrYMGYtFQo89+s9kS4vD6ujIk4nEZByONDUzM2p2B0orKiqaASzLUrCFcdQELODh5PHjL3hvv6NJhsICU5cyFNasokBzsqVlGm73xySTloxGNYwklp4QGIYLIeJ9Gx8uRFFi/b68qKohFCUBeGQiUWBaVqvIyetxXj7fdFZUxLWymYbwekqB0rPLrm2dPXt2QT8BD7a2jJoAwOtIWW91nCb9ng1VA41mIHCmZ+2taZk/33S58Hi8Q436HnqgRsnKJuOBHy8eLlBg9cqG9NvvMF1LvvuFfhmPhzDNgilTpigAUkpvqgRGUuIfxfe+Nsc8c6Z1oEHNyckTmZmfxF579cPhDNyLFrv1hnr/SIFkOJyrlk7JGq7PbG5ucTqdbZqmaVJKA1snUhLCkYTsIFI+H3zogYqsZ/84WHncS66JJF75u9N78y1fMHAuWFQmn37KYQUCnRi6aUUiUcLhhBUKJayebh3T/Ebs5b/uF05Xm+zrUyzLlIrqQGRnY3a0W7k5OV5gaiwWi2DrzIgVKxUCAI+Y7e1HAzdef1Qmk/aSkXIqlpV3dtm1rViWD7vUCaTMxBY2utfeKhBKBEW4hKZZaJpEUTTANE93SOHzoWT4TFVTBVJKs61VGIebyr62YMExgHA4HCJFEfsyAt3ARmkYP8vc9FgARQUQ4Sc2n1RKJhnp9947WfF4PQgcuNxB4XD4Qps31ZidnYr/yerzxCrZ0tLSu/7uXn/10wuGCxS46YYjixcv9gH09fVFsY/kKeHLTqPPYlnd1qn2kOPSWeWOS2eVee+4U0s2HSpS8/InioyMPJGe4RcOhw/AvfymouTRo2VDdUSGg3E0LT5cACvQ3SETiUlz586dAdDa2toHnE6VwJcd5kxgS3T3rrWuq69BhsMhdcKEbKnrvvCTm+vUsnINoTpUjwecDjtpKfPjr7yy37FwwSWqPytXBoO94epfdwtVHXYDR5//85GJJSVej8czH6C2tjYMNKVKIBXFWwi8CRiAUBQl5HA4wpqmJTVNiwshkgCmaTpN01Qty9IMw3BblpUtpXQhRAgpsxCiTy2acAQAPaFZiYQLXXfLRKLY4XCcraqqOrlixYpJ69evVwzDuB1462IRqK2qqoqvX7++Utf1aG1tbbNlWcybN6+kpKSk9EKGiUQi3tnZebazs7MnEonEEolEIhqNarquW7t37/b29vZWDsmhE/gbcHcqyadKoHHVqlVnY7GY2LNnz2WFEyZ8KoHO9vZLcnJyjm3dunVqVlZWXqoBATZs2PD26Y6OzMe3bNGKiot9h+rrOx595BFvOBQ6ANw2Gl+pELgS+9qw+OU33zw5o7y8FCAei0XXLF9e33LihG/dunURQAaDQT2ZTKoDhrFYTI9Go4P7zDRNIxAIOA8ePLiwetu2g0uWLq0c6AsFg6H5M2dKKWUZo9jEqZ76nlJUdeWhkyfzFUUZrFxmMpm8rLQ0KqX8gPNvIBLYH/eDr2J/dg7gh3tqavqmTZ9+3vF89qRJp0zTXAIcSZVAqp+UH2iqep20LItzCKiapiKEgZR3Msy95YXi3rV69aLX33uvwOl0OgEOHjjwkWmaOcCno/CTekDgtcKiov2v1tScOHLqlKw9fLh70VVXvQXUfQV/TmCX2+0+tnLt2ppb1qypUVX1FPD9i5r1EKQDvwJ6hBA92Gr5IlD0Ff0p2H+C/K7/+c7FSDLVwPnYtwrjGMc4xjGO/2/8G2XZpg8C1+lRAAAAAElFTkSuQmCC">Cos</a>
+			
+			<a href="admin.html" title="Contul meu"><img src="data:image/png;base64,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">Admin</a>
+			</div>
+		</div>
+		</div>
+			
+
+
+
+
+
+	<div class="container" id="continutProduse">
+		<div class="col-lg-6 col-md-6">
+			<img id="imageProduct" class="productImage"  src="https://cdn.helenas.ro/image/cache/catalog/charm-talisman-inima-cu-piatra-verde-ctipv-90867-1-312x388.jpg" width="" height="" alt="Jewellery">
+			
+		</div>
+
+		<div class="cartRow col-lg-6 col-md-6">
+			<h3 id="productName" class="productName" name="name">Pandantiv Glob Pavé</h3>
+			<p id="productDescription">Adoptă un look ghidat de iubire cu acest colier din argint 925, cu inimioară, care poate fi purtat cu două lungimi diferite mulțumită închizătorii sale ajustabile. Inimioara strălucitoare realizată din zirconiu cubic marchează utilizarea în premieră a acestei forme de piatră în colecția Eleganţă atemporală și reprezintă o variantă modernă a simbolului iubirii, ideal pentru a fi oferit în dar unei persoane speciale. Modelul contemporan și montarea pietrei în relief îl fac ușor de purtat mulți ani de acum înainte.</p>
+			
+
+			<span class="productPrice">75 &euro;</span>
+			<div class="shopItemDetails">
+			  <label for="quantity">Cantitate:</label>
+			  <input type="number" id="quantity" name="quantity" min="1" max="500" required="" value="1">
+			<div class="box">
+			<a href="#popup1" class="productDetailsBtn button"  onclick="addProducts()" >ADAUGA IN COS</a>
+</div>
+		</div>
+		</div>
+
+
+	</div>
+
+
+
+
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<p><strong>Informatii cos cumparaturi</strong></p>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+			Acest produs a fost adaugat cu succes in cosul dvs!
+		</div>
+	</div>
+</div>
+
+
+
+
+
+	<div class="footer grayBckgr">
+		<p>Copyright © Online Shop Jewellery. All Rights Reserved.</p>
+	</div>
+
+
+
+	</body>
+</html>
+

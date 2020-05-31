@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Meniu</title>
+		<link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript">
+
+			
+
+
+ var list = {};
+        async function getList(){
+        var response = await fetch("https://online-shop-jewellery.firebaseio.com/menu.json");
+
+        window.list = await response.json();
+        draw();
+      
+        }
+
+
+      
+
+function draw() {
+				var str = "";
+			
+				for (var i in list) { // cand trebuie sa caute in array de tip 0: {}, 1: {}, 2: {}...etc
+					
+				var produs = list[i];
+				
+						str+=`		
+
+						<div class="cartRow admin">
+						<img class="floatLeft productImage" src="${produs.imagine}" width="300" alt="">
+						
+						<span class="productName">Nume: ${produs.nume}</span>
+						<span class="productPrice">Pret: ${produs.pret} &#8364;</span>
+						<span class="productPrice">Stoc: ${produs.stoc} </span>
+					
+						<a 	onclick="del(${i});" class="floatLeft detailsBtn blue">STERGE</a>
+						</div>
+						`
+					
+				}
+
+				document.querySelector("#continutProduse").innerHTML = str;
+			}
+			
+
+			function del(idx) {
+				if(confirm(`Esti sigur ca vrei sa stergi ${list[idx].nume} ?`)){
+					list.splice(idx,1);
+					draw();
+				}
+			}
+
+
+
+
+
+
+
+		</script>
+</head>
+
+
+<body onload="getList();">
+		<!--<div class="loader-f"></div> -->
+
+		<div class="grayBckgr">
+		<div id="mainContent" class=" fancy container">
+        <a class="logo" href="index.html" title="Online Shop Jewellery">Online Shop Jewellery</a>
+			<div class="boxCartLogin">
+			<a href="cos.html" title="Cos de cumparaturi"><img src="data:image/png;base64,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">Cos</a>
+			
+			
+			</div>
+		</div>
+		</div>
+			
+
+<div class="container">
+<a href="add.html" class="adaugaProdus">Adauga produs</a>
+</div>
+<div  id="continutProduse" style="text-align: center;">
+	<div class="container cartContainer">
+
+        <div class="cartItems col-md-8">
+  
+
+        </div>
+
+</div>
+
+        <div class="cartTotal col-md-2">
+          <p>Numar produse: </p>
+          <span>TOTAL COMANDA:<p class="cartTolalPrice"> </p></span>
+        </div>
+      </div>
+
+
+</div>
+
+
+
+  
+
+	<div class="footer grayBckgr">
+		<p>Copyright © Online Shop Jewellery. All Rights Reserved.</p>
+	</div>
+
+	</body>
+</html>
