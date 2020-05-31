@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Meniu</title>
+		<link href="css/style.css" rel="stylesheet">
+		<script type="text/javascript">
+
+			var preparat = {};
+	
+			async function getList(){
+			var response = await fetch(`https://restaurant-menu-v1.firebaseio.com/menu/${window.location.search.substr(4)}.json`);
+			window.preparat = await response.json();
+			draw();
+			}
+
+			
+			function draw() {
+				var str = "";
+			
+				
+				
+						str+=`			
+						<div class="boxMancare">
+						<form>
+						<span>URL IMAGINE:</span>
+						<input type="text" name="urlImagine" class="urlImagine" placeholder="" />
+						<br />
+
+						<span>NUME:</span>
+						<input type="text" name="numePreparat" class="numePreparat" placeholder="" /><br />
+					
+
+						<span>INGREDIENTE:</span>
+						<input type="text" name="ingredientePreparat" class="ingredientePreparat" placeholder="" /><br />
+
+						<span>MOD DE PREPARARE:</span>
+						<textarea name="numePreparat" class="numePreparat" placeholder="" />
+					
+					<br />
+				<button type="submit" class="searchIngredients" id="mySearch" >SALVEAZA PREPARAT</button> 
+						</div>
+					
+						</form>
+						</div>
+						`
+					
+				
+
+				document.querySelector("#continutMeniu").innerHTML = str;
+			}
+
+  function edit(idx){
+                document.querySelector("[name='urlImagine']").value=agendaTelefonica[idx].name;
+                document.querySelector("[name='telephone']").value=agendaTelefonica[idx].telephone;
+
+
+                window.indexEdit = idx;
+            }
+
+
+
+
+
+		</script>
+</head>
+
+
+	<body onload="getList()">
+		<div class="butoane-right">
+		<a href="add.html" class="adauga-preparat">Adauga preparat nou</a>
+		</div>
+
+		<div id="container">
+			<h1>Cald si bun (ADMIN)</h1>
+		
+		
+		</div>
+
+		<div id="continutMeniu">
+		</div>
+
+
+	</body>
+</html>
