@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catalog note</title>
+    <meta charset="utf-8"/>
+    <link href="catalog.css" rel="stylesheet">
+    <script src="catalog.js"></script>  
+</head>
+
+<body onload="addItems()">
+          
+        <div id="form-section"> 
+            <h1>Lista Elevi</h1>           
+            <form id="idForm" onsubmit="add(event);">
+
+              <p class="requiredChar">*Acest camp este obligatoriu de completat si trebuie sa contina cel putin 3 caractere!</p>
+              <label>Nume: <input type="text" name="name" class="inputForm" /></label>
+
+
+              <button type="submit" value="ADAUGA ELEV" class="button sendButton">ADAUGA ELEV</button>
+            </form> 
+
+             <div id="contacts-section">
+                <table border="0" style="width:100%; border-collapse:collapse;" >
+                  <thead>
+                      <tr>
+                          <th>Nume elev</th>
+                          <th>Medie note</th>
+                          <th></th>                        
+
+                      </tr>
+
+                  </thead>
+                  <tbody>
+                       <tr>
+                              <td>Item description</td>
+                              <td>Action</td>
+                          </tr>
+                      
+                  </tbody>
+            </table>
+
+            </div>
+
+        </div>
+
+       
+                   
+        <div id="note_elev_wrapper"> 
+              <button onclick="hideElement()" class="button Hide">Ascunde notele</button> 
+               <h1>Note elev</h1>          
+              <form id="idForm" onsubmit="adaugaNota(nota)">
+
+      
+                <label>NOTA: <input type="number" name="nota" class="inputForm" /></label>
+
+
+                <input type="submit" value="ADAUGA NOTA" class="sendButton" />
+              </form> 
+
+        </div>
+    
+</body>
+</html>
