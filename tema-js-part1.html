@@ -136,10 +136,10 @@
        var i = arr.length;
        while (i--) {
        		if (arr[i] === x) {
-           		return "x exista in array";
+           		return true;
        		} 
     	}	
-    	return "x NU exista in array";
+    	return false;
 	}
  
 
@@ -165,14 +165,15 @@
 
     // 12. O functie "sumMinMax" care intoarce suma dintre max si min, dintr-un array primit ca parametru
 
- 	var arrayNumbers = ['852', '56', '3', '1200'];
- 	arrayNumbers.sort((a,b) => a - b); //console.log(arrayNumbers.toString());
+ 	var arrayNumbers = [852, 56, 3, 1200];
+
 
  	function sumMinMax(min,max) {
 		var min = parseInt(arrayNumbers[0]);
 		var max = parseInt(arrayNumbers[arrayNumbers.length -1]);
 		var suma = min+max;
 		return suma;
+		arrayNumbers.sort((a,b) => a - b); //console.log(arrayNumbers.toString());
  	}
 
 	console.log(sumMinMax(min,max));
@@ -205,7 +206,7 @@
 	return p;
 	}
 
- console.log(produsPozitive(["2","3","4"])); 
+ console.log(produsPozitive([2,3,4])); 
 
 
     // 15. O functie "palindrom" care verifica daca un numar primit ca parametru este palindrom (inversul == originalul, ex: 1234321, 55, 787)
@@ -214,8 +215,8 @@
 			return parametru === invers(parametru);
 	}
 
-	console.log(palindrom("ABCCBA"));
-	console.log(palindrom("ABCCBAd"));
+	console.log(palindrom("123321"));
+	console.log(palindrom("112233"));
 	</script>
 </head>
 
